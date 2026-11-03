@@ -12,6 +12,7 @@ import com.devsuperior.dsmeta.dto.SaleReportDTO;
 import com.devsuperior.dsmeta.services.SaleService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sales")
@@ -27,19 +28,17 @@ public class SaleController {
 	}
 
 	@GetMapping(value = "/summary")
-	public ResponseEntity<Page<SaleSummaryDTO>> getSummary(
+	public ResponseEntity<List<SaleSummaryDTO>> getSummary(
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 			@RequestParam(required = false)
 			LocalDate minDate,
 
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 			@RequestParam(required = false)
-			LocalDate maxDate,
-
-			Pageable pageable
+			LocalDate maxDate
 	) {
 
-		Page<SaleSummaryDTO> dto = service.findSaleSummary(minDate, maxDate, pageable);
+		List<SaleSummaryDTO> dto = service.findSaleSummary(minDate, maxDate);
 
 		return ResponseEntity.ok(dto);
 	}

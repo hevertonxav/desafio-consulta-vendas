@@ -4,6 +4,8 @@ public record SaleSummaryDTO(
         String sellerName,
         Double total
 ) {
+
+
 }
 
 
